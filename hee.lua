@@ -86,6 +86,7 @@ local InterfaceManager = {} do
                     Callback = function()
 			Settings.Theme = Value
                         InterfaceTheme:SetValue(getgenv().theme)
+			InterfaceManager:SaveSettings()
                     end
                 },
                 {
