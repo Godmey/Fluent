@@ -1,7 +1,7 @@
 local httpService = game:GetService("HttpService")
 
 local InterfaceManager = {} do
-	InterfaceManager.Folder = "KillHub"
+	InterfaceManager.Folder = "FluentSettings"
     InterfaceManager.Settings = {
         Theme = "Dark",
         Acrylic = true,
@@ -62,57 +62,32 @@ local InterfaceManager = {} do
 
         InterfaceManager:LoadSettings()
 
-		local Set = tab:AddSection("Theme")
+		local section = tab:AddSection("Settings Fluent")
 
-		local MQosiwkd = Set:AddDropdown("sosi", {
+		local M_oshq19 = section:AddDropdown("InterfaceTheme", {
 			Title = "Theme",
 			Values = Library.Themes,
 			Default = Settings.Theme,
 			Callback = function(Value)
-			  getgenv().theme = Value
+				Library:SetTheme(Value)
                 Settings.Theme = Value
                 InterfaceManager:SaveSettings()
 			end
 		})
-    Set:AddButton({
-    Title = "Set Theme",
-    Callback = function()
-        Window:Dialog({
-            Title = "Set Theme",
-            Content = "Theme : "..getgenv().Themem,
-            Buttons = {
-                {
-                    Title = "Confirm",
-                    Callback = function()
-			Settings.Theme = Value
-                        InterfaceTheme:SetValue(getgenv().theme)
-			InterfaceManager:SaveSettings()
-                    end
-                },
-                {
-                    Title = "Cancel",
-                    Callback = function()
-                    end
-                }
-            }
-        })
-    end
-})
-        
+
+        M_oshq19:SetValue(Settings.Theme)
 	
-		if Library.UseAcrylic then
-			Set:AddToggle("AcrylicToggle", {
-				Title = "Acrylic",
-				Default = Settings.Acrylic,
-				Callback = function(Value)
-					Library:ToggleAcrylic(Value)
-                    Settings.Acrylic = Value
-                    InterfaceManager:SaveSettings()
-				end
-			})
-		end
-	  
-		Set:AddToggle("TransparentToggle", {
+		section:AddToggle("AcrylicToggle", {
+			Title = "Acrylic",
+			Default = Settings.Acrylic,
+			Callback = function(Value)
+				Library:ToggleAcrylic(Value)
+                Settings.Acrylic = Value
+                InterfaceManager:SaveSettings()
+			end
+		})
+	
+		section:AddToggle("TransparentToggle", {
 			Title = "Transparency",
 			Default = Settings.Transparency,
 			Callback = function(Value)
@@ -121,7 +96,8 @@ local InterfaceManager = {} do
                 InterfaceManager:SaveSettings()
 			end
 		})
-	
+		
+		Library.MinimizeKeybind = Settings.MenuKeybind
     end
 end
 
